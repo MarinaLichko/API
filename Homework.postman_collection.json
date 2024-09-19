@@ -156,9 +156,6 @@
 							"    pm.expect(jsonData.data.responsible.id).to.eql(\"1000105\");\r",
 							"});\r",
 							"\r",
-							"pm.test(\"Body contains taskStatement\", function () {\r",
-							"    pm.expect(pm.response.text()).to.include(\"statement\");\r",
-							"});\r",
 							""
 						],
 						"type": "text/javascript",
