@@ -187,7 +187,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"contentType\": \"Task\",\r\n    \"name\": \"сделай что-нибудь\",\r\n    \"deadline\": null,\r\n    \"parent\": null,\r\n    \"isUrgent\": false,\r\n    \"isTemplate\": false,\r\n    \"owner\": {\r\n        \"id\": \"1000104\",\r\n        \"contentType\": \"Employee\"\r\n    },\r\n    \"responsible\": {\r\n        \"id\": \"1000105\",\r\n        \"contentType\": \"Employee\"\r\n    },\r\n    \"contractor\": null,\r\n    \"attaches\": []\r\n}",
+					"raw": "{\r\n    \"contentType\": \"Task\",\r\n    \"name\": \"сделай что-нибудь\",\r\n    \"deadline\": null,\r\n    \"parent\": null,\r\n    \"isUrgent\": false,\r\n    \"isTemplate\": false,\r\n    \"owner\": {\r\n        \"id\": \"1000104\",\r\n        \"contentType\": \"Employee\"\r\n    },\r\n    \"responsible\": {\r\n        \"id\": \"1000105\",\r\n        \"contentType\": \"Employee\"\r\n    },\r\n    \"contractor\": null,\r\n    \"attaches\": []\r\n}\r\n\r\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -206,6 +206,90 @@
 						"api",
 						"v3",
 						"task"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/task (add description)",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Variables\r",
+							"\r",
+							"//Tests\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Cheking the taskDescription\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.statement).to.eql(\"<p>taskDescription</p>\")\r",
+							"    });\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token1}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{access_token1}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"contentType\": \"Task\",\r\n    \"attaches\": [],\r\n    \"statement\": \"<p>taskDescription</p>\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://radio-shop.megaplan.by/api/v3/task/{{task_id}}",
+					"protocol": "https",
+					"host": [
+						"radio-shop",
+						"megaplan",
+						"by"
+					],
+					"path": [
+						"api",
+						"v3",
+						"task",
+						"{{task_id}}"
 					]
 				}
 			},
